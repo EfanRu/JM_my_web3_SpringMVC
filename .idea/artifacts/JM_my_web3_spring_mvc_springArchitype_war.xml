@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JM_my_web3_spring_mvc_springArchitype:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>JM_my_web3_spring_mvc_springArchitype</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="JM_my_web3_spring_mvc_springArchitype-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="JM_my_web3_spring_mvc_springArchitype:war exploded" />
+    </root>
+  </artifact>
+</component>
