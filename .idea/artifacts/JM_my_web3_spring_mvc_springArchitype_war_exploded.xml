@@ -50,7 +50,7 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.9.5" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.26" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
         </element>
       </element>
       <element id="directory" name="META-INF">

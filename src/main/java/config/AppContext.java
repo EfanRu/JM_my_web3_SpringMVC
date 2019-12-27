@@ -9,7 +9,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import util.PropertyReader;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -21,6 +20,7 @@ public class AppContext {
     @Autowired
     private Environment environment;
 
+    //Mb no local SessionFactoryBean need use JPA???
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -36,12 +36,7 @@ public class AppContext {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("db.driver"));
-        dataSource.setUrl(environment.getRequiredProperty("jdbc:mysql://"
-            + "db.host"
-            + ":"
-            + "db.port"
-            + "/"
-            + "db.name"));
+        dataSource.setUrl(environment.getRequiredProperty("db.url"));
         dataSource.setUsername(environment.getRequiredProperty("db.login"));
         dataSource.setPassword(environment.getRequiredProperty("db.password"));
         return dataSource;
@@ -49,10 +44,10 @@ public class AppContext {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("db.hibernate.dialect", environment.getRequiredProperty("db.hibernate.dialect"));
-        properties.put("db.hibernate.show_sql", environment.getRequiredProperty("db.hibernate.show_sql"));
-        properties.put("db.hibernate.format_sql", environment.getRequiredProperty("db.hibernate.format_sql"));
-        properties.put("db.hibernate.hbm2ddl.auto", environment.getRequiredProperty("db.hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.dialect", environment.getRequiredProperty("db.hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("db.hibernate.show_sql"));
+        properties.put("hibernate.format_sql", environment.getRequiredProperty("db.hibernate.format_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("db.hibernate.hbm2ddl.auto"));
         return properties;
     }
 
