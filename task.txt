@@ -32,6 +32,7 @@ Links:
     Spring MVC example 2: https://www.codejava.net/frameworks/spring/spring-mvc-spring-data-jpa-hibernate-crud-example
     Spring MVC full java conf. : https://www.dev2qa.com/spring-mvc-full-java-based-configuration-example/
     Spring MVC MySQL: https://www.javaguides.net/2018/11/spring-mvc-5-hibernate-5-jsp-mysql-crud-tutorial.html
+    Spring MVC JPA MySQL EntityManager: https://www.javaguides.net/2018/11/spring-mvc-5-spring-data-jpa-hibernate-jsp-mysql-tutorial.html
     Presentation of Sprting MVC: https://people.ric-ul.ru/QA/Files/common/Contest/93_5453748daea69dda43459f003e971f6f1cf1.pdf
 
 

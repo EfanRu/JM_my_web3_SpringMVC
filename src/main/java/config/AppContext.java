@@ -26,7 +26,7 @@ public class AppContext {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] {
-                "model"
+                "model", "dao", "service"
         });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;

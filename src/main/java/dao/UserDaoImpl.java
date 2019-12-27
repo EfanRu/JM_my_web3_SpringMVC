@@ -6,19 +6,27 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImplHib implements UserDao {
+@Repository
+public class UserDaoImpl implements UserDao {
     private Session session;
     @Autowired
     private SessionFactory sessionFactory;
     private Transaction transaction = session.getTransaction();
 
-//    public UserDaoImplHib(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public UserDaoImpl() {}
 
     public List<User> getAllUsers() {
         List<User> result = new ArrayList<>();

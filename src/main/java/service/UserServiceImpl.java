@@ -3,6 +3,7 @@ package service;
 import dao.UserDao;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,18 +11,10 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static UserServiceImpl userService;
     @Autowired
     private UserDao userDao;
 
-    private UserServiceImpl() {}
-
-    public static UserServiceImpl getInstance() {
-        if (userService == null) {
-            userService = new UserServiceImpl();
-      }
-        return userService;
-    }
+    public UserServiceImpl() {}
 
     @Override
     @Transactional
