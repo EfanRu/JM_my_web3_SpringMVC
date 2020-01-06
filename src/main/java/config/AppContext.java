@@ -23,15 +23,11 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:DB.properties")
 @EnableTransactionManagement
-@ComponentScan({"config", "controller", "dao", "model", "service"})
+@ComponentScan({"config", "controller", "model", "service"})
 @EnableJpaRepositories(basePackages = "repository")
 public class AppContext {
     @Autowired
     private Environment env;
-
-//    public AppContext() {
-//        super();
-//    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -66,7 +62,7 @@ public class AppContext {
     }
 
     @Bean
-    public PlatformTransactionManager getTransactionManager(final EntityManagerFactory emf) {
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
