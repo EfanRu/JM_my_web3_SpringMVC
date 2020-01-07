@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public boolean delUser(String id) {
         try {
-            userRepository.deleteById(Integer.parseInt(id));
+            userRepository.deleteById(Long.parseLong(id));
             return true;
         } catch (NumberFormatException e) {
             e.printStackTrace();

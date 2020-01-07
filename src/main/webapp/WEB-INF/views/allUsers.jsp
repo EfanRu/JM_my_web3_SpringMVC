@@ -34,14 +34,22 @@
                       <td>${user.getPassword()}</td>
                       <td>${user.getPhoneNumber()}</td>
                       <td>${user.getRole()}</td>
-                      <td>
-                          <form action="/admin/edit" method="get">
-                              <button type="submit" name="id" value="${user.getId()}">Edit</button>
-                          </form>
-                      </td>
+<%--First button don't working. May be it's bug(((I don't understand this(((--%>
                       <td>
                           <form action="/admin/delete" method="post">
-                              <button type="submit" name="id" value="${user.getId()}">Del</button>
+                              <button type="submit" name="delId" value="${user.getId()}">del</button>
+                          </form>
+                      </td>
+
+                      <td>
+                          <form action="/admin/delete" method="post">
+                              <button type="submit" name="delId" value="${user.getId()}">del</button>
+                          </form>
+                      </td>
+
+                      <td>
+                          <form action="/admin/edit" method="get">
+                              <button type="submit" name="id" value="${user.getId()}">edit</button>
                           </form>
                       </td>
 
@@ -76,15 +84,6 @@
           <input type="submit" value="Submit">
       </form>
   </body>
-
-<%--
-  <body>
-  <p>Edit and delete user:
-      <form action="/admin/edit" method="GET">
-          <input type="submit" value="Edit or delete user">
-      </form>
---%>
-
 
     <form action="/logout" method="get">
       <input type="submit" value="Log out">

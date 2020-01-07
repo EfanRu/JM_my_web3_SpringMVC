@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +27,13 @@ public class AppController {
     private Environment env;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-    public String login(ModelMap model) {
+    public String login() {
         LOG.info("Inside login or welcome page!");
         return "login";
     }
 
-    @RequestMapping(value = "/authorization", method = RequestMethod.POST)
+    @RequestMapping(value = "/authorization", method = RequestMethod.GET)
+    @Transactional(readOnly = true)
     public String auth(@ModelAttribute("login") String login, @ModelAttribute("password") String password) {
         LOG.info("Inside authorization! User info \nlogin: " + login + "\npassword: " + password);
         if (userService.checkAuth(login, password)) {
@@ -45,13 +46,19 @@ public class AppController {
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public String add(ModelMap model) {
+    public String add(@ModelAttribute("firstName") String firstName,
+                      @ModelAttribute("lastName") String lastName,
+                      @ModelAttribute("phoneNumber") String phoneNumber,
+                      @ModelAttribute("role") String role,
+                      @ModelAttribute("login") String login,
+                      @ModelAttribute("password") String password) {
         LOG.info("Inside add!");
-        return "allUsers";
+        userService.addUser(new User(firstName, lastName, login, password, Long.parseLong(phoneNumber), role));
+        return "redirect:/admin/all";
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(ModelMap model) {
+    public String user(@ModelAttribute("user") User user) {
         return "user";
     }
 
@@ -63,24 +70,26 @@ public class AppController {
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
-    public String editUser(ModelMap model) {
+    public String editUserPage(@ModelAttribute("id") String id, ModelMap model) {
+        model.addAttribute("id", id);
         return "editUsers";
     }
 
-//
-//    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-////    @GetMapping("/")
-//    public String login(ModelMap model) {
-//        model.addAttribute("title", "Login page");
-//        model.addAttribute("message", "Please log in app");
-//        return "index";
-//    }
+    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
+    public String editUser(@ModelAttribute("id") String id,
+                           @ModelAttribute("firstName") String firstName,
+                           @ModelAttribute("lastName") String lastName,
+                           @ModelAttribute("phoneNumber") String phoneNumber,
+                           @ModelAttribute("role") String role,
+                           @ModelAttribute("login") String login,
+                           @ModelAttribute("password") String password) {
+        userService.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
+        return "redirect:/admin/all";
+    }
 
-/*    public ModelAndView login() {
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "Login page");
-        model.addObject("message", "Please log in app");
-        model.setViewName("login");
-        return model;
-    }*/
+    @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
+    public String delUser(@ModelAttribute("delId") String id) {
+        userService.delUser(id);
+        return "redirect:/admin/all";
+    }
 }
