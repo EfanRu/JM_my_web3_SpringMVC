@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -32,12 +33,12 @@ public class AppController {
         return "login";
     }
 
-    @RequestMapping(value = "/authorization", method = RequestMethod.GET)
+    @RequestMapping(value = "/authorization", method = RequestMethod.POST)
     @Transactional(readOnly = true)
     public String auth(@ModelAttribute("login") String login, @ModelAttribute("password") String password) {
         LOG.info("Inside authorization! User info \nlogin: " + login + "\npassword: " + password);
         if (userService.checkAuth(login, password)) {
-            return "redirect:/user";
+            return "redirect:/admin/all";
         } else if (login.equals(env.getProperty("web.admin")) && password.equals(env.getProperty("web.password"))) {
             userService.addUser(new User("Root admin", "Root admin", "admin", "admin", 0L,"admin"));
             return "redirect:/user";

@@ -12,7 +12,7 @@
 </head>
 <body>
     <p>Please log in:<br>
-        <form action="/authorization" method="get">
+        <form action="/authorization" method="post">
             <p>Login:<br>
                 <input type="text" name="login">
             </p>

@@ -3,6 +3,7 @@ package config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -29,12 +30,15 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+//                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/login").permitAll()
+//                    .anyRequest().authenticated()
                 .and().formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/authorization")
+                    .defaultSuccessUrl("/user")
                     .failureUrl("/login")
-                    .permitAll()
                 .and().logout()
                     .permitAll()
                     .logoutUrl("/logout")
@@ -42,4 +46,15 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                     .deleteCookies();
     }
+/*
+    @Configuration
+    protected static class AuthenticationConfiguration extends
+            GlobalAuthenticationConfigurerAdapter {
+
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
+            auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        }
+    }*/
 }
