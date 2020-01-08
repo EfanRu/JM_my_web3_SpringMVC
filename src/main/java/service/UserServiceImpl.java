@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.istack.Nullable;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkAuth(String login, String password) {
         return userRepository.checkAuth(login, password).anyMatch(u -> u.getLogin().equals(login) && u.getPassword().equals(password));
+    }
+
+    @Override
+    @Nullable
+    public User getUserByLogin(String login) {
+        return userRepository.getUserByLogin(login).get();
     }
 }

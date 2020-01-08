@@ -13,6 +13,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <spring>5.2.1.RELEASE</spring>
+        <spring.securiry>5.2.1.RELEASE</spring.securiry>
     </properties>
 
     <build>
@@ -74,14 +76,14 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.2.1.RELEASE</version>
+            <version>${spring}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.2.1.RELEASE</version>
+            <version>${spring}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
@@ -98,6 +100,24 @@
             <version>1.7.25</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
 
     </dependencies>
 

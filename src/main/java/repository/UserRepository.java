@@ -7,11 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT u FROM User u WHERE u.login = :login and u.password = :password")
-    public Stream<User> checkAuth(@Param("login")String login, @Param("password")String password);
+    Stream<User> checkAuth(@Param("login")String login, @Param("password")String password);
+
+    Optional<User> getUserByLogin(String login);
+
 }
