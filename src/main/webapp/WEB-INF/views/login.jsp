@@ -14,7 +14,7 @@
     <p>Please log in:<br>
         <form action="/authorization" method="post">
             <p>Login:<br>
-                <input type="text" name="login">
+                <input type="text" name="username">
             </p>
             <p>Password:<br>
                 <input type="password" name="password">

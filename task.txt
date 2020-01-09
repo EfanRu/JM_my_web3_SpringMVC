@@ -45,6 +45,9 @@ Links:
     Spring MVC JPA MySQL EntityManager: https://www.javaguides.net/2018/11/spring-mvc-5-spring-data-jpa-hibernate-jsp-mysql-tutorial.html
     Presentation of Sprting MVC: https://people.ric-ul.ru/QA/Files/common/Contest/93_5453748daea69dda43459f003e971f6f1cf1.pdf
 
+    Spring boot:
+    https://habr.com/ru/post/435144/
+    https://o7planning.org/ru/11267/spring-boot-tutorial-for-beginners
 
 Questions:
 
@@ -63,7 +66,7 @@ Reworking list 2:
     + 2)именование пакетов с маленькой буквы
     + 3)В сервисе не должно быть подключения к базе, подключение вынести в отдельный пакет и класс
     + 4)Интерфейсы для дао и сервиса
-    +5)Убрать все комментарии из кода
+    + 5)Убрать все комментарии из кода
     + 6)В сервлетах не дублировать код
     + 7)Убрать конфигурацию с Hibernate
 Reworking list 3:

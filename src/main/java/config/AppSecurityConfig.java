@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private AuthProvider authProvider;
 
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -30,8 +32,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-//                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+//                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/login").permitAll()
 //                    .anyRequest().authenticated()
                 .and().formLogin()
@@ -45,6 +47,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login")
                     .invalidateHttpSession(true)
                     .deleteCookies();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider);
     }
 /*
     @Configuration

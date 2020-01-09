@@ -32,7 +32,7 @@ public class AppController {
         LOG.info("Inside login or welcome page!");
         return "login";
     }
-
+/*
     @RequestMapping(value = "/authorization", method = RequestMethod.POST)
     @Transactional(readOnly = true)
     public String auth(@ModelAttribute("login") String login, @ModelAttribute("password") String password) {
@@ -44,7 +44,7 @@ public class AppController {
             return "redirect:/user";
         }
         return "redirect:/login";
-    }
+    }*/
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public String add(@ModelAttribute("firstName") String firstName,

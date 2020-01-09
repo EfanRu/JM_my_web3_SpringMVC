@@ -55,6 +55,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Nullable
     public User getUserByLogin(String login) {
-        return userRepository.getUserByLogin(login).get();
+        return userRepository.getUserByLogin(login);
     }
 }
