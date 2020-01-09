@@ -1,4 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -34,12 +38,6 @@
                       <td>${user.getPassword()}</td>
                       <td>${user.getPhoneNumber()}</td>
                       <td>${user.getRole()}</td>
-<%--First button don't working. May be it's bug(((I don't understand this(((--%>
-                      <td>
-                          <form action="/admin/delete" method="post">
-                              <button type="submit" name="delId" value="${user.getId()}">del</button>
-                          </form>
-                      </td>
 
                       <td>
                           <form action="/admin/delete" method="post">
@@ -47,7 +45,7 @@
                           </form>
                       </td>
 
-                      <td>
+                  <td>
                           <form action="/admin/edit" method="get">
                               <button type="submit" name="id" value="${user.getId()}">edit</button>
                           </form>
