@@ -122,6 +122,18 @@ Reworking list 6:
     + 4) Взде вынести дао/сервисы в поле того класса, котрые их используют, и создавать единожды;
     + 5) Тут у тебя явно лишняя работа делается. Не стоит создавать сразу два дао, если вернуть нужно только один;
 
+    1) Сделать нормальное удаление
+    2) Показ значений
+    3) добавить поддержку рус
+    4) очертание
+    5) отдельную папку
+    6) @EnableJpaRepositories(basePackages = "repository")
+    7) /user
+    8) ModelAttribute
+    9) Роль класс
+    10) EntityManager -> Rep
+    11) Sokr - norm
+
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
 

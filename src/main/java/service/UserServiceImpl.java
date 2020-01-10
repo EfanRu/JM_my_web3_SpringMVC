@@ -10,6 +10,7 @@ import repository.UserRepository;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -17,19 +18,16 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl() {}
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    @Transactional
     public boolean addUser(User u) {
         return u.equals(userRepository.save(u));
     }
 
     @Override
-    @Transactional
     public boolean delUser(String id) {
         try {
             userRepository.deleteById(Long.parseLong(id));
@@ -41,13 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         User u = new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), role);
         return u.equals(userRepository.save(u));
     }
 
-    @Override
     public boolean checkAuth(String login, String password) {
         return userRepository.checkAuth(login, password).anyMatch(u -> u.getLogin().equals(login) && u.getPassword().equals(password));
     }
