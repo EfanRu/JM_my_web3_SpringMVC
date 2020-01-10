@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import repository.UserRepository;
 import service.UserService;
 
 import java.util.List;
@@ -24,6 +25,8 @@ public class AppController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private Environment env;
 
@@ -72,7 +75,8 @@ public class AppController {
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public String editUserPage(@ModelAttribute("id") String id, ModelMap model) {
-        model.addAttribute("id", id);
+        User user = userRepository.findById(Long.parseLong(id)).get();
+        model.addAttribute("user", user);
         return "editUsers";
     }
 

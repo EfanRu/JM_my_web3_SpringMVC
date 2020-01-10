@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -16,8 +15,8 @@
 
   <p>All users in database:<br>
 
-      <form action="/admin/all" method="get">
-          <table>
+      <form:form action="/admin/all" method="get">
+          <table border="1">
               <tr>
                   <td>id</td>
                   <td>First name</td>
@@ -31,30 +30,31 @@
               </tr>
                   <c:forEach var="user" items="${listUser}">
               <tr>
-                      <td>${user.getId()}</td>
-                      <td>${user.getFirstName()}</td>
-                      <td>${user.getLastName()}</td>
-                      <td>${user.getLogin()}</td>
-                      <td>${user.getPassword()}</td>
-                      <td>${user.getPhoneNumber()}</td>
-                      <td>${user.getRole()}</td>
+                      <td>${user.id}</td>
+                      <td>${user.firstName}</td>
+                      <td>${user.lastName}</td>
+                      <td>${user.login}</td>
+                      <td>${user.password}</td>
+                      <td>${user.phoneNumber}</td>
+                      <td>${user.role}</td>
 
                       <td>
-                          <form action="/admin/delete" method="post">
-                              <button type="submit" name="delId" value="${user.getId()}">del</button>
-                          </form>
+                          <form:form action="/admin/delete" method="post">
+                              <button type="submit" name="delId" value="${user.id}">del</button>
+                          </form:form>
                       </td>
 
-                  <td>
-                          <form action="/admin/edit" method="get">
-                              <button type="submit" name="id" value="${user.getId()}">edit</button>
-                          </form>
+
+                      <td valign="middle">
+                          <form:form action="/admin/edit" method="get">
+                              <button type="submit" name="id" value="${user.id}">edit</button>
+                          </form:form>
                       </td>
 
               </tr>
                   </c:forEach>
           </table>
-      </form>
+      </form:form>
 
   <body>
   <p>Add user:<br>

@@ -1,4 +1,4 @@
-package config;
+package security;
 
 import com.sun.istack.Nullable;
 import model.User;

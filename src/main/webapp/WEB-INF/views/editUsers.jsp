@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -16,32 +17,18 @@
 <body>
 <p>Edit User<br>
     <p>Write id of user for delete:<br>
-    <form action="/admin/edit" method="post">
-        <p>Id:<br>
-            ${id}
-            <input type="hidden" name="id" value=${id}>
+    <form:form action="/admin/edit" method="post">
+        <p>Id: ${user.id}
+            <input type="hidden" name="id" value="${user.id}">
         </p>
-        <p>First name:<br>
-            <input type="text" name="firstName">
-        </p>
-        <p>Last name:<br>
-            <input type="text" name="lastName">
-        </p>
-        <p>Phone number<br>
-            <input type="text" name="phoneNumber">
-        </p>
-        <p>Role<br>
-            <input type="text" name="role">
-        </p>
-        <p>Login<br>
-            <input type="text" name="login">
-        </p>
-        </p>
-        <p>Password<br>
-            <input type="password" name="password">
-        </p>
+        <p>First name: <input type="text" name="firstName" value="${user.firstName}"></p>
+        <p>Last name: <input type="text" name="lastName" value="${user.lastName}"></p>
+        <p>Phone number: <input type="text" name="phoneNumber" value="${user.phoneNumber}"></p>
+        <p>Role: <input type="text" name="role" value="${user.role}"></p>
+        <p>Login: <input type="text" name="login" value="${user.login}"></p>
+        <p>Password: <input type="password" name="password" value="${user.password}"></p>
         <input type="submit" value="Submit">
-    </form>
+    </form:form>
 
     <form action="/logout" method="get">
         <input type="submit" value="Log out">

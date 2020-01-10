@@ -2,6 +2,7 @@ package config;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import security.AppSecurityConfig;
 
 @Order(1)
 public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
