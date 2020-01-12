@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delUser(String id) {
+    public boolean deleteUser(String id) {
         try {
             userRepository.deleteById(Long.parseLong(id));
             return true;
@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
-        User u = new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), role);
-        return u.equals(userRepository.save(u));
+        User user = new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), role);
+        return user.equals(userRepository.save(user));
     }
 
     public boolean checkAuth(String login, String password) {

@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import repository.UserRepository;
 import service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @PropertySource("classpath:DB.properties")
@@ -50,19 +51,23 @@ public class AppController {
     }*/
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
-    public String add(@ModelAttribute("firstName") String firstName,
-                      @ModelAttribute("lastName") String lastName,
-                      @ModelAttribute("phoneNumber") String phoneNumber,
-                      @ModelAttribute("role") String role,
-                      @ModelAttribute("login") String login,
-                      @ModelAttribute("password") String password) {
+    public String add(HttpServletRequest req) {
         LOG.info("Inside add!");
-        userService.addUser(new User(firstName, lastName, login, password, Long.parseLong(phoneNumber), role));
+        userService.addUser(new User(
+                req.getParameter("firstName"),
+                req.getParameter("lastName"),
+                req.getParameter("login"),
+                req.getParameter("password"),
+                Long.parseLong(req.getParameter("phoneNumber")),
+                req.getParameter("role")));
         return "redirect:/admin/all";
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(@ModelAttribute("user") User user) {
+    public String user(ModelMap model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+        model.addAttribute(user);
         return "user";
     }
 
@@ -81,20 +86,21 @@ public class AppController {
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
-    public String editUser(@ModelAttribute("id") String id,
-                           @ModelAttribute("firstName") String firstName,
-                           @ModelAttribute("lastName") String lastName,
-                           @ModelAttribute("phoneNumber") String phoneNumber,
-                           @ModelAttribute("role") String role,
-                           @ModelAttribute("login") String login,
-                           @ModelAttribute("password") String password) {
-        userService.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
+    public String editUser(HttpServletRequest req) {
+        userService.updateUser(
+                req.getParameter("id"),
+                req.getParameter("firstName"),
+                req.getParameter("lastName"),
+                req.getParameter("phoneNumber"),
+                req.getParameter("role"),
+                req.getParameter("login"),
+                req.getParameter("password"));
         return "redirect:/admin/all";
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
     public String delUser(@ModelAttribute("delId") String id) {
-        userService.delUser(id);
+        userService.deleteUser(id);
         return "redirect:/admin/all";
     }
 }
