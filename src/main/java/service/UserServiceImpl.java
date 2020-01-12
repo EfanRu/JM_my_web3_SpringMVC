@@ -45,7 +45,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean checkAuth(String login, String password) {
-        return userRepository.checkAuth(login, password).anyMatch(u -> u.getLogin().equals(login) && u.getPassword().equals(password));
+//        return userRepository.checkAuth(login, password).anyMatch(u -> u.getLogin().equals(login) && u.getPassword().equals(password));
+        return userRepository.checkAuth(login, password);
     }
 
     @Override

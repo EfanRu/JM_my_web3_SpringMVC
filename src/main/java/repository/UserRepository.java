@@ -11,13 +11,11 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Long> {
-
+public interface UserRepository extends JpaRepository<User, Long>, CustomizedUsers<User> {
+/*
     @Query(value = "SELECT u FROM User u WHERE u.login = :login and u.password = :password")
     Stream<User> checkAuth(@Param("login")String login, @Param("password")String password);
 
-//    Optional<User> getUserByLogin(String login);
-
     @Query(value = "SELECT u FROM User u WHERE u.login = :login")
-    User getUserByLogin(@Param("login") String login);
+    User getUserByLogin(@Param("login") String login);*/
 }
