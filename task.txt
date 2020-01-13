@@ -134,7 +134,8 @@ Reworking list 7:
     + 10) EntityManager -> Rep
     + 11) Sokr - norm
     12) Отказ в доступе редиректить на страницу с ошибкой
-    13) Почистить код от хлама
+    13) Сделать дефолтную учетную запись
+    14) Почистить код от хлама
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');

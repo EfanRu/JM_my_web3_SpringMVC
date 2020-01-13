@@ -19,7 +19,7 @@ import service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@PropertySource("classpath:DB.properties")
+//@PropertySource("classpath:DB.properties")
 @Controller
 public class AppController {
     private static final Logger LOG = LoggerFactory.getLogger(AppController.class);
@@ -28,8 +28,8 @@ public class AppController {
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private Environment env;
+//    @Autowired
+//    private Environment env;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login() {
