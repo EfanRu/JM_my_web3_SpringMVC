@@ -12,26 +12,18 @@ public class CustomizedUsersImpl implements CustomizedUsers {
 
     @Override
     public boolean checkAuth(String login, String password) {
-//        String hql = "SELECT u FROM User u WHERE u.login = :login and u.password = :password";
-//        Query query = entityManager.createQuery(hql);
-//        query.setParameter("login", login);
-//        query.setParameter("password", password);
-//        return entityManager.createQuery(hql, User.class).getSingleResult() != null;
-//
-
-        String hql = "SELECT * FROM user WHERE login = " + login + " and password = " + password;
-        Query query = entityManager.createQuery(hql);
-//        query.setParameter("login", login);
-//        query.setParameter("password", password);
-        return entityManager.createQuery(hql, User.class).getSingleResult() != null;
+        String hql = "SELECT u FROM User u WHERE u.login = ?1 and u.password = ?2";
+        Query query = entityManager.createQuery(hql, User.class);
+        query.setParameter(1, login);
+        query.setParameter(2, password);
+        return query.getSingleResult() != null;
     }
 
     @Override
     public User getUserByLogin(String login) {
-//        String hql = "SELECT u FROM User u WHERE u.login = :login";
-        String hql = "SELECT * FROM user WHERE login = " + login;
-        Query query = entityManager.createQuery(hql);
-//        query.setParameter("login", login);
-        return entityManager.createQuery(hql, User.class).getSingleResult();
+        String hql = "SELECT u FROM User u WHERE u.login = ?1";
+        Query query = entityManager.createQuery(hql, User.class);
+        query.setParameter(1, login);
+        return (User) query.getSingleResult();
     }
 }

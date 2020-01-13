@@ -131,7 +131,7 @@ Reworking list 7:
     + 7) /user
     + 8) ModelAttribute
     9) Роль класс
-    10) EntityManager -> Rep
+    + 10) EntityManager -> Rep
     + 11) Sokr - norm
     12) Отказ в доступе редиректить на страницу с ошибкой
     13) Почистить код от хлама
