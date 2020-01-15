@@ -13,7 +13,7 @@ import security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"config", "controller", "security"})
+@ComponentScan({"config", "controller", "service", "security"})
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
