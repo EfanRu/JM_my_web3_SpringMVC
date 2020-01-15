@@ -136,11 +136,13 @@ Reworking list 7:
     12) Отказ в доступе редиректить на страницу с ошибкой
     13) Сделать дефолтную учетную запись
     14) Почистить код от хлама
-
-    1) Чек бокс
-    2) http://localhost:8080/user
-    3) Черех через зависимость через GrantedAuthority
+Reworking list 8:
+    1) Сделать чек бокс для роли
+    2) http://localhost:8080/user исправить ошибку
+    3) Зависимость через GrantedAuthority
     4) вернуть DAO и Service
+    5) Добавить UserDetails и contextHandler, encoder
+    6) В чем отличие hasRole and access and hasAccess(mb other name)
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
