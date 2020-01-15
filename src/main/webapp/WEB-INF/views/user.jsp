@@ -34,7 +34,7 @@
                 <td>${user.login}</td>
                 <td>${user.password}</td>
                 <td>${user.phoneNumber}</td>
-                <td>${user.role}</td>
+                <td>${user.role.name}</td>
             </tr>
     </table>
 </form:form>

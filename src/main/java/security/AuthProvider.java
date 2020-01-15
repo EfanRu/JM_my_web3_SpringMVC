@@ -1,6 +1,5 @@
 package security;
 
-import com.sun.istack.Nullable;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -34,9 +33,9 @@ public class AuthProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Wrong password for login: " + login);
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (user.getRole().equals("admin")) {
+        if (user.getRole().getName().equals("admin")) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else if (user.getRole().equals("user")) {
+        } else if (user.getRole().getName().equals("user")) {
             authorities.add(new SimpleGrantedAuthority("USER"));
         } else {
             throw new BadCredentialsException("No such user role");

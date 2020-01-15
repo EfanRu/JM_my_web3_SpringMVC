@@ -127,7 +127,7 @@ Reworking list 7:
     + 3) добавить поддержку рус
     + 4) очертание
     + 5) отдельную папку
-    6) @EnableJpaRepositories(basePackages = "repository") как обойтись без этой аннотации
+    + 6) @EnableJpaRepositories(basePackages = "repository") как обойтись без этой аннотации
     + 7) /user
     + 8) ModelAttribute
     9) Роль класс
@@ -139,6 +139,9 @@ Reworking list 7:
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
+
+    insert into user (id, first_name, last_name, phone_number, role_id, login, password) VALUES(null, 'admin', 'admin', 999, 1, 'admin', 'admin');
+    insert into role (id, name) values(1, 'admin');
 
 Pre-project education structure:
     + ТЕМА №1 Разработка web-сервиса с использованием технологий Tomcat, Servlet, JSP, Maven , JDBC + паттерн проектирования Executor.

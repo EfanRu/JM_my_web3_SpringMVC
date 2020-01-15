@@ -36,7 +36,7 @@
                       <td>${user.login}</td>
                       <td>${user.password}</td>
                       <td>${user.phoneNumber}</td>
-                      <td>${user.role}</td>
+                      <td>${user.role.name}</td>
 
                       <td>
                           <form:form action="/admin/delete" method="post">

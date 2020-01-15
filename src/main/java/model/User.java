@@ -19,12 +19,13 @@ public class User {
     private String password;
     @Column(name = "phone_number")
     private Long phoneNumber;
-    @Column(name = "role")
-    private String role;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User() {}
 
-    public User(Long id, String firstName, String lastName, String login, String password, Long phoneNumber, String role) {
+    public User(Long id, String firstName, String lastName, String login, String password, Long phoneNumber, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -34,7 +35,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String login, String password, Long phoneNumber, String role) {
+    public User(String firstName, String lastName, String login, String password, Long phoneNumber, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -76,11 +77,11 @@ public class User {
         this.id = id;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
