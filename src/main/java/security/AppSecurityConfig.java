@@ -15,7 +15,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     @Autowired
     private AuthProvider authProvider;
-
+//User details
+    //contexhandler
+    //encoder
 /*
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -33,6 +35,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
+                //Check it
                     .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 //                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/login").permitAll()
@@ -50,6 +53,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies();
     }
 
+    //UserDetailService
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider);
