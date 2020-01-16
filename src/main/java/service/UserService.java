@@ -10,5 +10,6 @@ public interface UserService {
     boolean deleteUser(String id);
     boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password);
     boolean checkAuth(String login, String password);
+    User getUserById(String id);
     User getUserByLogin(String login);
 }

@@ -22,7 +22,6 @@ import java.util.Properties;
 @PropertySource("classpath:DB.properties")
 @EnableTransactionManagement
 @ComponentScan({"config", "controller", "model", "dao", "service", "security"})
-@EnableJpaRepositories(basePackages = "repository")
 public class AppContext {
     @Autowired
     private Environment env;

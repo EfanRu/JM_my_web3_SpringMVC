@@ -12,7 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import repository.UserRepository;
+import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -22,7 +22,7 @@ public class AppController {
     private static final Logger LOG = LoggerFactory.getLogger(AppController.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login() {
@@ -34,7 +34,7 @@ public class AppController {
     public String add(HttpServletRequest req) {
         LOG.info("Inside add!");
         Role role = Role.parseRole(req.getParameter("role"));
-        userRepository.save(new User(
+        userService.addUser(new User(
                 req.getParameter("firstName"),
                 req.getParameter("lastName"),
                 req.getParameter("login"),
@@ -54,34 +54,34 @@ public class AppController {
 
     @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
     public String allUser(ModelMap model) {
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.getAllUsers();
         model.addAttribute("listUser", users);
         return "allUsers";
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public String editUserPage(@ModelAttribute("id") String id, ModelMap model) {
-        User user = userRepository.findById(Long.parseLong(id)).get();
+        User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "editUsers";
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
     public String editUser(HttpServletRequest req) {
-        userRepository.saveAndFlush(new User(
-                Long.parseLong(req.getParameter("id")),
+        userService.updateUser(
+                req.getParameter("id"),
                 req.getParameter("firstName"),
                 req.getParameter("lastName"),
+                req.getParameter("phoneNumber"),
+                req.getParameter("role"),
                 req.getParameter("login"),
-                req.getParameter("password"),
-                Long.parseLong(req.getParameter("phoneNumber")),
-                Role.parseRole(req.getParameter("role"))));
+                req.getParameter("password"));
         return "redirect:/admin/all";
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
     public String delUser(@ModelAttribute("delId") String id) {
-        userRepository.deleteById(Long.parseLong(id));
+        userService.deleteUser(id);
         return "redirect:/admin/all";
     }
 }

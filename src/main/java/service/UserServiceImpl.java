@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
-        return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password));
+        return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
     }
 
     public boolean checkAuth(String login, String password) {
@@ -45,5 +45,10 @@ public class UserServiceImpl implements UserService {
     @Nullable
     public User getUserByLogin(String login) {
         return userDao.getUserByLogin(login);
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return userDao.getUserById(id);
     }
 }

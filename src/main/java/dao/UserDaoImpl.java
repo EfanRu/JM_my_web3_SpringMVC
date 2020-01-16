@@ -5,83 +5,68 @@ import model.Role;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
     @Autowired
-    private EntityManager em;
+    private EntityManagerFactory emf;
+//    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+//
+//    @PersistenceContext
+//    public void setEntityManager(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
 
     @Override
     public List<User> getAllUsers() {
-        Query query = em.createNamedQuery("SELECT u FROM User u");
+        Query query = entityManager.createNamedQuery("getAllUsers");
         return query.getResultList();
     }
 
+    @Transactional
     @Override
     public boolean addUser(User u) {
         try {
-            em.getTransaction().begin();
-            em.persist(u);
-            em.getTransaction().commit();
+            entityManager.persist(u);
             return true;
         } catch (RuntimeException e) {
             e.printStackTrace();
-        } finally {
-            if (em != null) {
-                try {
-                    em.getTransaction().rollback();
-                } catch (RuntimeException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         return false;
     }
 
+    @Transactional
     @Override
     public boolean deleteUser(String id) {
         try {
-            em.getTransaction().begin();
-            Query query = em.createNamedQuery("DELETE u FROM User WHERE u.id = :id");
+            Query query = entityManager.createNamedQuery("deleteUser");
             query.setParameter("id", Long.parseLong(id));
             query.executeUpdate();
-            em.getTransaction().commit();
             return true;
         } catch (RuntimeException e) {
             e.printStackTrace();
-        } finally {
-            if (em != null) {
-                try {
-                    em.getTransaction().rollback();
-                } catch (RuntimeException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         return false;
     }
 
+    @Transactional
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         try {
-            em.getTransaction().begin();
-            em.merge(new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), Role.parseRole(role)));
-            em.getTransaction().commit();
+            entityManager.merge(new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), Role.parseRole(role)));
             return true;
         } catch (RuntimeException e) {
             e.printStackTrace();
-        } finally {
-            if (em != null) {
-                try {
-                    em.getTransaction().rollback();
-                } catch (RuntimeException ex) {
-                    ex.printStackTrace();
-                }
-            }
         }
         return false;
     }
@@ -89,7 +74,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean checkAuth(String login, String password) {
         try {
-            Query query = em.createNamedQuery("SELECT u FROM User WHERE u.login = :login AND u.password = :password");
+            Query query = entityManager.createNamedQuery("checkAuth");
             query.setParameter("login", login);
             query.setParameter("password", password);
             return query.getSingleResult() != null;
@@ -103,8 +88,21 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByLogin(String login) {
         try {
-            Query query = em.createNamedQuery("SELECT u FROM User WHERE u.login = :login");
+            Query query = entityManager.createNamedQuery("getUserByLogin");
             query.setParameter("login", login);
+            return (User) query.getSingleResult();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public User getUserById(String id) {
+        try {
+            Query query = entityManager.createNamedQuery("getUserById");
+            query.setParameter("id", Long.parseLong(id));
             return (User) query.getSingleResult();
         } catch (RuntimeException e) {
             e.printStackTrace();

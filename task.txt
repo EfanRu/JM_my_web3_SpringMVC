@@ -140,7 +140,7 @@ Reworking list 8:
     1) Сделать чек бокс для роли
     2) http://localhost:8080/user исправить ошибку
     3) Зависимость через GrantedAuthority
-    4) вернуть DAO и Service
+    + 4) вернуть DAO и Service
     5) Добавить UserDetails и contextHandler, encoder
     6) В чем отличие hasRole and access and hasAccess(mb other name)
 

@@ -4,6 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+@NamedQueries({
+        @NamedQuery(name = "getUserByLogin", query = "FROM User u WHERE login = :login"),
+        @NamedQuery(name = "getUserById", query = "FROM User u WHERE u.id = :id"),
+        @NamedQuery(name = "checkAuth", query = "FROM User u WHERE u.login = :login AND u.password = :password"),
+        @NamedQuery(name = "deleteUser", query = "DELETE FROM User u WHERE u.id = :id"),
+        @NamedQuery(name = "getAllUsers", query = "FROM User u")
+})
 public class User {
     @Id
     @Column(name = "id")

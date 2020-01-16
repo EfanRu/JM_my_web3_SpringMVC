@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import repository.UserRepository;
+import service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,12 @@ import java.util.List;
 @Component
 public class AuthProvider implements AuthenticationProvider {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String login = authentication.getName();
-        User user = userRepository.getUserByLogin(login);
+        User user = userService.getUserByLogin(login);
         if (user == null) {
             throw new UsernameNotFoundException("Login not found");
         }

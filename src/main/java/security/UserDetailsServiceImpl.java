@@ -7,18 +7,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import repository.UserRepository;
+import service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRepository.getUserByLogin(s);
+        User user = userService.getUserByLogin(s);
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(new SimpleGrantedAuthority(user.getRole().getName()));
         return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), roles);
