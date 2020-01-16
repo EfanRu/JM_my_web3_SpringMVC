@@ -143,6 +143,7 @@ Reworking list 8:
     + 4) вернуть DAO и Service
     5) Добавить UserDetails и contextHandler, encoder
     6) В чем отличие hasRole and access and hasAccess(mb other name)
+    7) Добавить шифрование паролей
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');

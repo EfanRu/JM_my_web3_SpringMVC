@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsService userDetailsService;
+//    @Autowired
+//    private UserDetailsService userDetailsService;
     @Autowired
     private AuthProvider authProvider;
 //User details
@@ -36,7 +36,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Check it
-                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+//                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 //                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/login").permitAll()
 //                    .anyRequest().authenticated()
