@@ -36,9 +36,13 @@ public class User implements UserDetails {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
+    @Transient
     private boolean accountNonExpired = true;
+    @Transient
     private boolean accountNonLocked = true;
+    @Transient
     private boolean credentialsNonExpired = true;
+    @Transient
     private boolean enabled = true;
 
     public User() {}
