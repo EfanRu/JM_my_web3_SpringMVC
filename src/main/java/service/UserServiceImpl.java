@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +16,11 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserServiceImpl() {}
 
@@ -36,22 +39,38 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public boolean addUser(User u) {
-        return u.equals(userDao.addUser(u));
+    public boolean addUser(User user) {
+        User userFromDB = userDao.getUserByLogin(user.getLogin());
+        if (userFromDB == null) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userDao.addUser(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean deleteUser(String id) {
-        return userDao.deleteUser(id);
+        User user = userDao.getUserById(id);
+        if (user == null) {
+            return false;
+        }
+        userDao.deleteUser(id);
+        return true;
     }
 
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
+        password = bCryptPasswordEncoder.encode(password);
         return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
     }
 
     public boolean checkAuth(String login, String password) {
-        return userDao.checkAuth(login, password);
+        User user = userDao.getUserByLogin(login);
+        if (user == null) {
+            return false;
+        }
+        return bCryptPasswordEncoder.matches(password, user.getPassword());
     }
 
     @Override

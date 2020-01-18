@@ -151,6 +151,7 @@ Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
 
     insert into user (id, first_name, last_name, phone_number, role_id, login, password) VALUES(null, 'admin', 'admin', 999, 1, 'admin', 'admin');
+    insert into user (id, first_name, last_name, phone_number, role_id, login, password) VALUES(null, 'admin', 'admin', 999, 1, 'admin', '$2a$10$EeevpoM0kg9lFt3/7.dHnuvT/.CwHE6Z3mf/nQQXchNTpgkn8o6Hq');
     insert into role (id, name) values(1, 'admin');
 
 Pre-project education structure:

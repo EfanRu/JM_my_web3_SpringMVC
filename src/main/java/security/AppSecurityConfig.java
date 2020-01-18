@@ -7,27 +7,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private UserDetailsService userDetailsService;
     @Autowired
-    private AuthProvider authProvider;
-//User details
-    //contexhandler
-    //encoder
-/*
-    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-*/
+    private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
         auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("admin").password(bCryptPasswordEncoder.encode("admin")).roles("ADMIN");
     }
 
     @Override
@@ -36,9 +31,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Check it
-                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+//                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 //                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-//                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/login").permitAll()
 //                    .anyRequest().authenticated()
                 .and().formLogin()
@@ -53,21 +48,4 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                     .deleteCookies();
     }
-
-    //UserDetailService
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authProvider);
-    }
-/*
-    @Configuration
-    protected static class AuthenticationConfiguration extends
-            GlobalAuthenticationConfigurerAdapter {
-
-        @Override
-        public void init(AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-            auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-        }
-    }*/
 }
