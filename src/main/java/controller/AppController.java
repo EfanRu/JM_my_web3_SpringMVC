@@ -33,7 +33,6 @@ public class AppController {
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public String add(HttpServletRequest req) {
         LOG.info("Inside add!");
-        Role role = Role.parseRole(req.getParameter("role"));
         userService.addUser(new User(
                 req.getParameter("firstName"),
                 req.getParameter("lastName"),
@@ -46,9 +45,16 @@ public class AppController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(ModelMap model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) auth.getPrincipal();
-        model.addAttribute(user);
+        Authentication auth;
+        try {
+            auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = (User) auth.getPrincipal();
+            model.addAttribute(user);
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+            model.addAttribute("msg", "This user don't present in DB");
+            return "error";
+        }
         return "user";
     }
 

@@ -14,18 +14,12 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private EntityManagerFactory emf;
-//    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
     @PersistenceContext
     private EntityManager entityManager;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-//
-//    @PersistenceContext
-//    public void setEntityManager(EntityManager entityManager) {
-//        this.entityManager = entityManager;
-//    }
 
     @Override
     public List<User> getAllUsers() {

@@ -69,7 +69,10 @@
               <input type="text" name="phoneNumber">
           </p>
             <p>Role<br>
-              <input type="text" name="role">
+              <select name="role">
+                  <option value="admin">admin</option>>
+                  <option value="user">user</option>>
+              </select>
           </p>
           </p>
           <p>Login<br>

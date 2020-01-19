@@ -21,8 +21,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-//        auth.inMemoryAuthentication().withUser("admin").password(bCryptPasswordEncoder.encode("admin")).roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password(bCryptPasswordEncoder.encode("user")).roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password(bCryptPasswordEncoder.encode("admin")).roles("ADMIN");
     }
 
     @Override
@@ -30,12 +30,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                //Check it
-//                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-//                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/login").permitAll()
-//                    .anyRequest().authenticated()
                 .and().formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/authorization")

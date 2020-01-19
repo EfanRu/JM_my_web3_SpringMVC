@@ -132,20 +132,20 @@ Reworking list 7:
     + 6) @EnableJpaRepositories(basePackages = "repository") как обойтись без этой аннотации
     + 7) /user
     + 8) ModelAttribute
-    9) Роль класс
+    + 9) Роль класс
     + 10) EntityManager -> Rep
     + 11) Sokr - norm
     12) Отказ в доступе редиректить на страницу с ошибкой
-    13) Сделать дефолтную учетную запись
+    + 13) Сделать дефолтную учетную запись
     14) Почистить код от хлама
 Reworking list 8:
-    1) Сделать чек бокс для роли
-    2) http://localhost:8080/user исправить ошибку
-    3) Зависимость через GrantedAuthority
+    + 1) Сделать чек бокс для роли
+    + 2) http://localhost:8080/user исправить ошибку
+    + 3) Зависимость через GrantedAuthority
     + 4) вернуть DAO и Service
-    5) Добавить UserDetails и contextHandler, encoder
-    6) В чем отличие hasRole and access and hasAccess(mb other name)
-    7) Добавить шифрование паролей
+    + 5) Добавить UserDetails и contextHandler, encoder
+    + 6) В чем отличие hasRole and access and hasAccess(mb other name)
+    + 7) Добавить шифрование паролей
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
@@ -159,7 +159,7 @@ Pre-project education structure:
     + ТЕМА №2 Добавление в проект JPA, Hibernate. Применение паттернов Factory, Singletone.
     + ТЕМА №3 Добавление RBAC (Role Based Access Control), разделение по ролям, контроль доступности ресурсов для администратора и пользователя. Использование технологии Servlet Filters.
     + ТЕМА №4 Знакомство с Spring Core, перевод проекта с Servlet на Spring MVC. Конфигурирование Spring для работы с ORM (Hibernate).
-    ЗАДАЧА №5 Подключение Spring Security вместо Servlet Filters. Настройка конфигурации безопасности web-приложения.
+    + ТЕМА №5 Подключение Spring Security вместо Servlet Filters. Настройка конфигурации безопасности web-приложения.
     ТЕМА №6 Подключение фреймворка Bootstrap для создания адаптивных web страниц.
     ТЕМА №7 Перевод проекта на Spring Boot с использованием шаблонизатора Thymeleaf.
     ТЕМА №8 Создание RESTful сервиса с использованием технологий Spring REST. Построение грамотной REST архитектуры.

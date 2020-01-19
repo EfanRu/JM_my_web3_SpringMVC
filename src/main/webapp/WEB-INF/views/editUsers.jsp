@@ -24,7 +24,11 @@
         <p>First name: <input type="text" name="firstName" value="${user.firstName}"></p>
         <p>Last name: <input type="text" name="lastName" value="${user.lastName}"></p>
         <p>Phone number: <input type="text" name="phoneNumber" value="${user.phoneNumber}"></p>
-        <p>Role: <input type="text" name="role" value="${user.role.name}"></p>
+        <p>Role: <select name = "role">
+                    <option value="admin">admin</option>>
+                    <option value="user">user</option>>
+                 </select>
+        </p>
         <p>Login: <input type="text" name="login" value="${user.login}"></p>
         <p>Password: <input type="password" name="password" value="${user.password}"></p>
         <input type="submit" value="Submit">
