@@ -146,6 +146,14 @@ Reworking list 8:
     + 5) Добавить UserDetails и contextHandler, encoder
     + 6) В чем отличие hasRole and access and hasAccess(mb other name)
     + 7) Добавить шифрование паролей
+Reworking list 9:
+    1) Redirect admin on admin page and user on user page. Use SuccesHandler;
+    2) Block login for authenticated users;
+    3) Repair deleting first row in table;
+    4) Repair double cash in edit page;
+    5) Change Role. Create new constructor, del parse method;
+    6) NamedQueries in User must be delete;
+    7) Add default user and admin in @Bean class.
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
