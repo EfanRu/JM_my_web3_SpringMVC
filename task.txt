@@ -46,6 +46,7 @@ Links:
     Presentation of Sprting MVC: https://people.ric-ul.ru/QA/Files/common/Contest/93_5453748daea69dda43459f003e971f6f1cf1.pdf
 
     Spring security: https://habr.com/ru/post/482552/
+    SuccessHandler: https://www.baeldung.com/spring_redirect_after_login
 
     Spring boot:
     https://habr.com/ru/post/435144/
