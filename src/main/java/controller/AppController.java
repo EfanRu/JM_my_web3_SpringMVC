@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -25,9 +27,9 @@ public class AppController {
     private UserService userService;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-    public String login() {
+    public String login(Principal principal) {
         LOG.info("Inside login or welcome page!");
-        return "login";
+        return principal == null ? "login" : "redirect:/user";
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)

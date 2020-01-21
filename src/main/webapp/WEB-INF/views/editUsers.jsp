@@ -30,7 +30,7 @@
                  </select>
         </p>
         <p>Login: <input type="text" name="login" value="${user.login}"></p>
-        <p>Password: <input type="password" name="password" value="${user.password}"></p>
+        <p>Password: <input type="password" name="password" value="${pass}"></p>
         <input type="submit" value="Submit">
     </form:form>
 

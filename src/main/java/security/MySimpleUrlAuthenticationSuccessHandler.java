@@ -27,7 +27,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-
+        handle(httpServletRequest, httpServletResponse, authentication);
+        clearAuthenticationAttributes(httpServletRequest);
     }
 
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {

@@ -1,7 +1,9 @@
 package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +19,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new MySimpleUrlAuthenticationSuccessHandler();
@@ -35,14 +42,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/user/**").authenticated()
                     .antMatchers("/login").anonymous()
                 .and().formLogin()
                     .loginPage("/login")
-                    .permitAll()
-                    .successHandler(myAuthenticationSuccessHandler())
                     .loginProcessingUrl("/authorization")
-                    .defaultSuccessUrl("/user")
-                    .failureUrl("/login")
+                    .successHandler(myAuthenticationSuccessHandler())
                 .and().logout()
                     .permitAll()
                     .logoutUrl("/logout")
