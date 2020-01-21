@@ -153,7 +153,7 @@ Reworking list 9:
     3) Repair deleting first row in table;
     + 4) Repair double password encrypt in edit page;
     + 5) Change Role. Create new constructor, del parse method;
-    6) NamedQueries in User must be delete;
+    + 6) NamedQueries in User must be delete;
     7) Add default user and admin in @Bean class.
 
 Save code:

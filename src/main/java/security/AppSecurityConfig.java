@@ -19,6 +19,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private DefaultUser defaultUser;
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -32,7 +35,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-        auth.inMemoryAuthentication().withUser("user").password(bCryptPasswordEncoder.encode("user")).roles("USER");
+//        auth.inMemoryAuthentication().withUser("user").password(bCryptPasswordEncoder.encode("user")).roles("USER");
+        defaultUser.addInDbDefaultUser();
         auth.inMemoryAuthentication().withUser("admin").password(bCryptPasswordEncoder.encode("admin")).roles("ADMIN");
     }
 

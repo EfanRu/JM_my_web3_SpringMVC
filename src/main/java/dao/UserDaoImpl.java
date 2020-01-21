@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        Query query = entityManager.createNamedQuery("getAllUsers");
+        Query query = entityManager.createQuery("FROM User u");
         return query.getResultList();
     }
 
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean deleteUser(String id) {
         try {
-            Query query = entityManager.createNamedQuery("deleteUser");
+            Query query = entityManager.createQuery("DELETE FROM User u WHERE u.id = :id");
             query.setParameter("id", Long.parseLong(id));
             query.executeUpdate();
             return true;
@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean checkAuth(String login, String password) {
         try {
-            Query query = entityManager.createNamedQuery("checkAuth");
+            Query query = entityManager.createQuery("FROM User u WHERE u.login = :login AND u.password = :password");
             query.setParameter("login", login);
             query.setParameter("password", password);
             return query.getSingleResult() != null;
@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByLogin(String login) {
         try {
-            Query query = entityManager.createNamedQuery("getUserByLogin");
+            Query query = entityManager.createQuery("FROM User u WHERE login = :login");
             query.setParameter("login", login);
             return (User) query.getSingleResult();
         } catch (RuntimeException e) {
@@ -107,7 +107,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserById(String id) {
         try {
-            Query query = entityManager.createNamedQuery("getUserById");
+            Query query = entityManager.createQuery("FROM User u WHERE u.id = :id");
             query.setParameter("id", Long.parseLong(id));
             return (User) query.getSingleResult();
         } catch (RuntimeException e) {
