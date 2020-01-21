@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
-        if (password != null) {
+        if (password != null && !password.equals("")) {
             password = bCryptPasswordEncoder.encode(password);
             return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
         }

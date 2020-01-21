@@ -41,7 +41,7 @@ public class AppController {
                 req.getParameter("login"),
                 req.getParameter("password"),
                 Long.parseLong(req.getParameter("phoneNumber")),
-                Role.parseRole(req.getParameter("role"))));
+                new Role(req.getParameter("role"))));
         return "redirect:/admin/all";
     }
 
@@ -87,7 +87,7 @@ public class AppController {
         return "redirect:/admin/all";
     }
 
-    @RequestMapping(value = "/admin/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/delete", method = RequestMethod.DELETE)
     public String delUser(@ModelAttribute("delId") String id) {
         userService.deleteUser(id);
         return "redirect:/admin/all";

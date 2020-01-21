@@ -39,7 +39,7 @@
                       <td>${user.role.name}</td>
 
                       <td>
-                          <form:form action="/admin/delete" method="post">
+                          <form:form action="/admin/delete" method="delete">
                               <button type="submit" name="delId" value="${user.id}">del</button>
                           </form:form>
                       </td>

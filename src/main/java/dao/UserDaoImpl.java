@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         try {
-            entityManager.merge(new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), Role.parseRole(role)));
+            entityManager.merge(new User(Long.parseLong(id), firstName, lastName, login, password, Long.parseLong(phoneNumber), new Role(role)));
             return true;
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login) {
         try {
-            entityManager.merge(new User(Long.parseLong(id), firstName, lastName, login, getUserById(id).getPassword(), Long.parseLong(phoneNumber), Role.parseRole(role)));
+            entityManager.merge(new User(Long.parseLong(id), firstName, lastName, login, getUserById(id).getPassword(), Long.parseLong(phoneNumber), new Role(role)));
             return true;
         } catch (RuntimeException e) {
             e.printStackTrace();

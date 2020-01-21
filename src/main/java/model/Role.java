@@ -19,21 +19,13 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public Role(Integer id, String name) {
-        this.id = id;
+    public Role(String name) {
         this.name = name;
     }
 
-    public static Role parseRole(String role) {
-        Role result = new Role();
-        if (role.toLowerCase().equals("admin")) {
-            result.name = "admin";
-        } else if (role.toLowerCase().equals("user")) {
-            result.name = "user";
-        } else {
-            result.name = "anonymous";
-        }
-        return result;
+    public Role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Override
