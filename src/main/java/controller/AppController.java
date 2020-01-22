@@ -64,7 +64,8 @@ public class AppController {
     public String allUser(ModelMap model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("listUser", users);
-        return "allUsers";
+//        return "allUsers";
+        return "adminAll";
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
@@ -87,7 +88,7 @@ public class AppController {
         return "redirect:/admin/all";
     }
 
-    @RequestMapping(value = "/admin/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
     public String delUser(@ModelAttribute("delId") String id) {
         userService.deleteUser(id);
         return "redirect:/admin/all";

@@ -10,8 +10,7 @@
   </head>
 
   <body>
-  <p>It's your project! Welcome!<br>
-  </body>
+  <p>It's you project! Welcome!<br>
 
   <p>All users in database:<br>
 
@@ -39,11 +38,10 @@
                       <td>${user.role.name}</td>
 
                       <td>
-                          <form:form action="/admin/delete" method="delete">
+                          <form:form action="/admin/delete" method="get">
                               <button type="submit" name="delId" value="${user.id}">del</button>
                           </form:form>
                       </td>
-
 
                       <td valign="middle">
                           <form:form action="/admin/edit" method="get">
@@ -56,7 +54,6 @@
           </table>
       </form:form>
 
-  <body>
   <p>Add user:<br>
       <form action="/admin/add" method="post">
           <p>First name:<br>
@@ -84,7 +81,6 @@
           </p>
           <input type="submit" value="Submit">
       </form>
-  </body>
 
     <form action="/logout" method="get">
       <input type="submit" value="Log out">

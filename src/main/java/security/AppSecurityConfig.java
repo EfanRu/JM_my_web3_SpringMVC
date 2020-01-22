@@ -1,5 +1,7 @@
 package security;
 
+import model.Role;
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +21,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private DefaultUser defaultUser;
+
 
     @Bean
     @Override
@@ -35,9 +36,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-//        auth.inMemoryAuthentication().withUser("user").password(bCryptPasswordEncoder.encode("user")).roles("USER");
-        defaultUser.addInDbDefaultUser();
-        auth.inMemoryAuthentication().withUser("admin").password(bCryptPasswordEncoder.encode("admin")).roles("ADMIN");
+        userService.addUser(new User("default user", "default user", "user", "user", 99L, new Role("user")));
+        userService.addUser(new User("default admin", "default admin", "admin", "admin", 99L, new Role("admin")));
     }
 
     @Override
