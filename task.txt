@@ -155,6 +155,9 @@ Reworking list 9:
     + 5) Change Role. Create new constructor, del parse method;
     + 6) NamedQueries in User must be delete;
     + 7) Add default user and admin in @Bean class.
+Reworking list 10:
+    1) Шлефануть аксесс хэндлер;
+    2) Сделать дефолтный Bean c пользователем.
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
