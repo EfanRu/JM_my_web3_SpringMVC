@@ -148,7 +148,7 @@ Reworking list 8:
     + 6) В чем отличие hasRole and access and hasAccess(mb other name)
     + 7) Добавить шифрование паролей
 Reworking list 9:
-    + 1) Redirect admin on admin page and user on user page. Use SuccesHandler;
+    + 1) Redirect admin on admin page and user on user page. Use SuccessHandler;
     + 2) Block login for authenticated users;
     + 3) Repair deleting first row in table;
     + 4) Repair double password encrypt in edit page;
@@ -156,7 +156,7 @@ Reworking list 9:
     + 6) NamedQueries in User must be delete;
     + 7) Add default user and admin in @Bean class.
 Reworking list 10:
-    1) Шлефануть аксесс хэндлер;
+    + 1) Шлефануть аксесс хэндлер;
     2) Сделать дефолтный Bean c пользователем.
 
 Save code:
