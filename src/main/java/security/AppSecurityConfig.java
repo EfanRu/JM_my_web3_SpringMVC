@@ -36,8 +36,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
-//        userService.addUser(new User("default user", "default user", "user", "user", 99L, new Role("user")));
-//        userService.addUser(new User("default admin", "default admin", "admin", "admin", 99L, new Role("admin")));
     }
 
     @Override
