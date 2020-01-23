@@ -21,9 +21,9 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
                 .getAuthorities()
                 .stream()
                 .anyMatch(ca -> ca.getAuthority().equals("ROLE_ADMIN"))) {
-            redirectStrategy.sendRedirect(request, response, "/admin/all");
+            response.sendRedirect("/admin/all");
         } else {
-            redirectStrategy.sendRedirect(request, response, "/user");
+            response.sendRedirect("/user");
         }
     }
 }
