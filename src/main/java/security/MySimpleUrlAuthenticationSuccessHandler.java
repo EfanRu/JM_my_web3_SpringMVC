@@ -17,21 +17,13 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String targetUrl = "";
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-        for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                targetUrl = "/user";
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-                targetUrl = "/admin/all";
-            }
+        if (authentication
+                .getAuthorities()
+                .stream()
+                .anyMatch(ca -> ca.getAuthority().equals("ROLE_ADMIN"))) {
+            redirectStrategy.sendRedirect(request, response, "/admin/all");
+        } else {
+            redirectStrategy.sendRedirect(request, response, "/user");
         }
-
-        if (response.isCommitted()) {
-            return;
-        }
-
-        redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 }
